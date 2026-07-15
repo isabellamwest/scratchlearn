@@ -18,7 +18,7 @@ $$L(w, b) = -\frac{1}{n} \sum_{i=1}^{n} \Big[ y_i \log \sigma(z_i) + (1 - y_i) \
 
 ## The gradient, step by step
 
-The key fact is the sigmoid's derivative:
+The sigmoid has a convenient derivative:
 
 $$\sigma'(z) = \frac{e^{-z}}{(1 + e^{-z})^2} = \sigma(z)\,\big(1 - \sigma(z)\big).$$
 

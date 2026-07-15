@@ -70,7 +70,7 @@ pytest
   logistic loss.
 - **Gradients you can trust.** The MLP's backprop is verified against central finite
   differences to a relative error of 1e-6, and the GMM test asserts the EM log-likelihood is
-  monotonically non-decreasing — the two tests I would keep if I could keep only two.
+  monotonically non-decreasing — the two I check first when a refactor breaks something.
 - **Vectorised NumPy throughout.** A Python loop over samples is treated as a bug, with the
   documented exceptions of tree recursion and the EM/Lloyd outer iterations.
 

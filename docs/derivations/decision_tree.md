@@ -42,4 +42,4 @@ weighted impurities come from a single array expression.
 Recursion stops at a pure node, at `max_depth`, or below `min_samples_split`. With no limits
 the tree drives training error to zero by memorising the data — the test suite asserts
 exactly this, and notebook 03 shows the wiggly decision boundaries it produces. Limiting depth
-trades that variance for bias; depth is the tree's main regularisation knob.
+trades that variance for bias; depth is the main way to regularise the tree.

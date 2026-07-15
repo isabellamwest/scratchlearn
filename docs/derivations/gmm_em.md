@@ -45,8 +45,8 @@ $\mathcal{L} = \log p(x \mid \theta_{\text{old}})$ (KL is zero). The M-step can 
 $\mathcal{L}$, and the new log-likelihood is at least the new ELBO. Chaining:
 $\log p(x \mid \theta_{\text{new}}) \ge \mathcal{L}(q, \theta_{\text{new}}) \ge
 \mathcal{L}(q, \theta_{\text{old}}) = \log p(x \mid \theta_{\text{old}})$.
-The test suite asserts this monotonicity on the recorded history — the single strongest
-correctness check on the whole implementation, because nearly any bug in either step breaks it.
+The test suite asserts this monotonicity on the recorded history. It is a strong correctness
+check, because nearly any bug in either step breaks it.
 
 ## E-step in formulas
 
@@ -84,9 +84,9 @@ equals $1$ so the sum never vanishes. This is `_log_sum_exp` in the code; the me
 per-point normalisers is precisely the mean log-likelihood recorded in
 `log_likelihood_history_`.
 
-## Where the information theory lives
+## The information-theoretic view
 
-The E-step is literally "set the KL divergence to zero". More broadly, EM shows that fitting a
+The E-step sets the KL divergence to zero. More broadly, EM shows that fitting a
 latent-variable model is a variational problem: maximise a free-energy-style functional
 $\mathcal{L}(q, \theta)$ that trades data fit against the information gap between the chosen
 $q$ and the true posterior. Variational inference generalises exactly this picture by
