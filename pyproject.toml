@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scratchlearn"
+version = "0.1.0"
+description = "Core machine learning algorithms written from scratch in NumPy, with the maths to go with them"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Isabella" }]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+keywords = ["machine-learning", "numpy", "education"]
+
+[project.urls]
+Repository = "https://github.com/isabellamwest/scratchlearn"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP"]
+
+[tool.mypy]
+files = ["src"]
+check_untyped_defs = true

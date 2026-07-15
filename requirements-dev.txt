@@ -1,0 +1,6 @@
+scikit-learn
+matplotlib
+pytest
+pytest-cov
+ruff
+mypy
