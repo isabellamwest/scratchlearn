@@ -6,7 +6,7 @@
 [![licence](https://img.shields.io/badge/licence-MIT-lightgrey)](LICENSE)
 
 I built this library to understand how scikit-learn algorithms work from first principles. Each algorithm is implemented using only NumPy, with the mathematical derivation documented alongside the code and unit tests verifying agreement with scikit-learn.
-The library is intentionally small and easy to read. Each estimator is implemented as a single class, prioritising clarity over optimisation, with the underlying theory explained in the accompanying notes.
+I kept the library small so each implementation stays readable. Each estimator is implemented as a single class, prioritising clarity over optimisation, with the underlying theory explained in the accompanying notes.
 
 ## What's inside
 
@@ -36,7 +36,7 @@ cd scratchlearn
 pip install -e .
 ```
 
-The API follows the scikit-learn conventions, so it should feel familiar:
+The API mirrors scikit-learn's estimator interface (fit, predict, score, get_params, etc.).
 
 ```python
 from scratchlearn.linear_model import Ridge
