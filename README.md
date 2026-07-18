@@ -71,6 +71,11 @@ pytest
 - **Gradients you can trust.** The MLP's backprop is verified against central finite
   differences to a relative error of 1e-6, and the GMM test asserts the EM log-likelihood is
   monotonically non-decreasing — the two I check first when a refactor breaks something.
+- **Property-based testing for the maths.** [`tests/test_properties.py`](tests/test_properties.py)
+  uses [Hypothesis](https://hypothesis.readthedocs.io/) to check invariants across generated
+  inputs rather than fixed examples — the finite-difference check above generalised to every
+  architecture and batch, Lasso's KKT optimality conditions, PCA round-trips, and more. See
+  [tests/README.md](tests/README.md) for the full list and what each one protects against.
 - **Vectorised NumPy throughout.** A Python loop over samples is treated as a bug, with the
   documented exceptions of tree recursion and the EM/Lloyd outer iterations.
 
