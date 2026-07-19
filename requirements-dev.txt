@@ -5,3 +5,4 @@ hypothesis
 pytest-cov
 ruff
 mypy
+pyflyby
