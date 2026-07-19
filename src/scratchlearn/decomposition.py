@@ -48,7 +48,12 @@ class PCA(BaseEstimator):
         k = components.shape[0] if self.n_components is None else self.n_components
         self.components_ = components[:k]
         self.explained_variance_ = variances[:k]
-        self.explained_variance_ratio_ = variances[:k] / variances.sum()
+        total = variances.sum()
+        # A constant input has zero total variance; report each ratio as 0
+        # rather than 0/0 = NaN, since no direction explains any variance.
+        self.explained_variance_ratio_ = (
+            variances[:k] / total if total > 0.0 else np.zeros_like(variances[:k])
+        )
         return self
 
     def transform(self, X: ArrayLike) -> np.ndarray:

@@ -16,7 +16,7 @@ max_examples instead.
 """
 
 import numpy as np
-from hypothesis import assume, given, settings
+from hypothesis import assume, example, given, settings
 from hypothesis import strategies as st
 from hypothesis.extra import numpy as hnp
 from numpy.testing import assert_allclose
@@ -287,6 +287,24 @@ def test_pca_eigen_and_svd_agree_on_the_spectrum(X):
     # spectrum-scale shift caused by a wrong centring or 1/(n-1) factor.
     scale = 1.0 + ev_svd.sum()
     assert_allclose(ev_eigen, ev_svd, rtol=1e-7, atol=1e-8 * scale)
+
+
+@settings(max_examples=75, deadline=None)
+@given(_pca_cases())
+@example(np.zeros((3, 2)))  # constant input: zero total variance, the 0/0 = NaN case
+def test_pca_variance_ratio_is_finite_and_normalised(X):
+    """explained_variance_ratio_ stays finite, non-negative and totals 1 (or 0).
+
+    A constant input has zero total variance, so the ratio must degrade to 0
+    rather than 0/0 = NaN; otherwise the kept components' ratios sum to 1.
+    """
+    ratio = PCA().fit(X).explained_variance_ratio_
+    assert np.isfinite(ratio).all()
+    assert (ratio >= 0.0).all()
+    # exactly 0 when there is no variance to explain, else normalised to 1;
+    # k <= 4 normalised terms carry ~1e-16 rounding, so 1e-9 is ample slack.
+    total = float(ratio.sum())
+    assert total == 0.0 or abs(total - 1.0) <= 1e-9
 
 
 # ---------------------------------------------------------------------------
